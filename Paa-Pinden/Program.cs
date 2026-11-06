@@ -9,7 +9,7 @@ namespace Paa_Pinden
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddRazorComponents();
+            builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
             var app = builder.Build();
 
@@ -27,7 +27,7 @@ namespace Paa_Pinden
             app.UseAntiforgery();
 
             app.MapStaticAssets();
-            app.MapRazorComponents<App>();
+            app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
 
             app.Run();
         }

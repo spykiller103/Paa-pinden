@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+
+                <NavLink class="nav-link" href="profile">
+                    <span class="bi bi-person" aria-hidden="true"></span> Profil
+                </NavLink>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

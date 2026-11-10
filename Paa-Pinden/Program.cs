@@ -1,15 +1,47 @@
-using Paa_Pinden.Components;
+using PaaPinden.Components;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
+using PaaPinden.Components.Account;
+using Microsoft.EntityFrameworkCore;
+using PaaPinden.Data;
 
-namespace Paa_Pinden
+namespace PaaPinden
 {
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            var connectionString = builder.Configuration.GetConnectionString("PaaPindenContext") ?? throw new InvalidOperationException("Connection string 'PaaPindenContext' not found.");
+
+            builder.Services.AddDbContext<PaaPindenContext>(options => options.UseSqlServer(connectionString));
 
             // Add services to the container.
             builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+
+            builder.Services.AddCascadingAuthenticationState();
+
+            builder.Services.AddScoped<IdentityRedirectManager>();
+
+            builder.Services.AddScoped<AuthenticationStateProvider, IdentityRevalidatingAuthenticationStateProvider>();
+
+            builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultScheme = IdentityConstants.ApplicationScheme;
+        options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+    })
+    .AddIdentityCookies();
+
+            builder.Services.AddIdentityCore<ApplicationUser>(options =>
+    {
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Stores.SchemaVersion = IdentitySchemaVersions.Version3;
+    })
+    .AddEntityFrameworkStores<PaaPindenContext>()
+    .AddSignInManager()
+    .AddDefaultTokenProviders();
+
+            builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
             var app = builder.Build();
 
@@ -28,6 +60,8 @@ namespace Paa_Pinden
 
             app.MapStaticAssets();
             app.MapRazorComponents<App>().AddInteractiveServerRenderMode();
+
+            app.MapAdditionalIdentityEndpoints();;
 
             app.Run();
         }

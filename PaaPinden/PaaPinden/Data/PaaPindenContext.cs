@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using PaaPinden.Models;
+using System.ComponentModel.Design;
 
 namespace PaaPinden.Data
 {
@@ -22,7 +23,10 @@ namespace PaaPinden.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Comment>();
+            builder.Entity<Comment>()
+                .HasMany(c => c.Pinds)
+                .WithOne(p => p.Comment)
+                .HasForeignKey(p => p.CommentId);
         }
     }
 }

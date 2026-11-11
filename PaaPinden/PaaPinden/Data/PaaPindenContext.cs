@@ -12,7 +12,7 @@ namespace PaaPinden.Data
         public DbSet<Pind> Pinds { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<Recipe> Recipes { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> Users { get; set; }
 
         public PaaPindenContext(DbContextOptions<PaaPindenContext> options) : base(options)
         {
@@ -26,7 +26,11 @@ namespace PaaPinden.Data
             builder.Entity<Comment>()
                 .HasMany(c => c.Pinds)
                 .WithOne(p => p.Comment)
-                .HasForeignKey(p => p.CommentId);
+                .HasForeignKey(p => p.CommentId)
+                .IsRequired();
+
+            builder.Entity<DiagramTool>();
+                //.HasMany()
         }
     }
 }

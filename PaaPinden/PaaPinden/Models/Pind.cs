@@ -6,7 +6,8 @@
         public string Category { get; set; }
         public DateTime PostDate { get; set; }
         public int Like { get; set; }
-        public string Comment { get; set; }
 
+        public int CommentId { get; set; }
+        public Comment Comment { get; set; }
     }
 }

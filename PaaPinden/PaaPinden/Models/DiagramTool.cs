@@ -2,11 +2,14 @@
 {
     public class DiagramTool
     {
-        public string Name { get; set; }
-        public List<int> Columns { get; set; }
-        public List<int> Rows { get; set; }
-        public bool ProtectetContent { get; set; }
-        public int[,] Cells { get; set; }
-        public bool UsedCells { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public int Columns { get; set; }
+        public int Rows { get; set; }
+        public int LockedCells { get; set; }
+        public int Cells { get; set; }
+        public int UsedCells { get; set; }
+
+        public List<Project> Projects { get; set; } = new();
     }
 }

@@ -12,7 +12,7 @@ namespace PaaPinden
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("PaaPindenContext") ?? throw new InvalidOperationException("Connection string 'PaaPindenContext' not found.");
+            var connectionString = builder.Configuration.GetConnectionString("Default") ?? throw new InvalidOperationException("Connection string 'PaaPindenContext' not found.");
 
             builder.Services.AddDbContext<PaaPindenContext>(options => options.UseSqlServer(connectionString));
 

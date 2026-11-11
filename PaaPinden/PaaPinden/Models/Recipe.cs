@@ -1,6 +1,6 @@
 ﻿namespace PaaPinden.Models
 {
-    public class Recipe : Post
+    public class Recipe : Pind
     {
         public string RecipeName { get; set; }
         public TimeOnly TimeUsage { get; set; }

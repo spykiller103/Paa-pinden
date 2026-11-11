@@ -58,3 +58,79 @@ h1:focus {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
     text-align: start;
 }
+
+
+
+.action-btn {
+    background: transparent; 
+    border: none; 
+    box-shadow: none; 
+    padding: 0; 
+    cursor: pointer; 
+    font-size: 20px; 
+    line-height: 1; 
+}
+
+
+
+/* Feed should be in the middle*/
+.feed-wrapper {
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.post-image {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.post-text {
+    margin-bottom: 12px;
+}
+
+.LikesNumber, .CommentsNumber {
+    margin-right: 16px; 
+    font-weight: 600;
+    color: #555;
+}
+
+/*
+    Comments-style
+*/
+.comment-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 8px 0;
+}
+
+.avatar-small {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.comment-author, .post-author {
+    font-weight: bold;
+}
+
+.comment-text {
+    margin: 0; 
+}

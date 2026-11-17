@@ -134,3 +134,12 @@ h1:focus {
 .comment-text {
     margin: 0; 
 }
+.category-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.category-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(72, 42, 37, 0.10);
+
+}

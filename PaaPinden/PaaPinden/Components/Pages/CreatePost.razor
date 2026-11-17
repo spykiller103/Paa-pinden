@@ -2,11 +2,120 @@
 
 <PageTitle>Opret opslag</PageTitle>
 <h4>VÆLG OPSLAGSTYPEN</h4>
-<div>
-    <p>
-      
-    </p>
+
+<div class="container py-5">
+
+    <!-- Overskrift -->
+    <div class="mb-4">
+        <span class="text-uppercase small fw-semibold">
+            Vis os dine masker
+        </span>
+
+        <h1 class="mt-2">Opret opslag</h1>
+
+        <p class="text-muted">
+            Hvad vil du gerne oprette?
+        </p>
+    </div>
+
+    <!-- Kategori vælger -->
+    <div class="card border-0 shadow-sm p-4"
+         style="border-radius: 20px; background-color: #FFFCF7;">
+
+        <div class="row g-4">
+
+            <!-- Opskrift -->
+            <div class="col-md-6">
+                <a href="/CreateRecipe"
+                   class="text-decoration-none">
+
+                    <div class="card h-100 p-4 category-card"
+                         style="border: 1.5px solid #C87552;
+                        border-radius: 16px;
+                        background-color: #FFFCF7;">
+
+                        <div class="mb-4">
+                            <div class="rounded-circle d-flex
+                                align-items-center justify-content-center"
+                                 style="width: 52px;
+                                height: 52px;
+                                background-color: #F6E4D9;">
+
+                                <i class="bi bi-journal-richtext fs-3"
+                                   style="color: #B95139;"></i>
+                            </div>
+                        </div>
+
+                        <h4 style="color: #482A25;">
+                            Opskrift
+                        </h4>
+
+                        <p style="color: #80665B;">
+                            Del en opskrift med garn, materialer
+                            og fremgangsmåde.
+                        </p>
+
+                        <div class="mt-auto pt-3">
+                            <div class="btn w-100 text-white"
+                                 style="background-color: #A94F38;
+                                border-radius: 8px;">
+                                Vælg opskrift
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+            <!-- Pind -->
+            <div class="col-md-6">
+                <a href="/CreatePind"
+                   class="text-decoration-none">
+
+                    <div class="card h-100 p-4 category-card"
+                         style="border: 1px solid #E9D8C6;
+                        border-radius: 16px;
+                        background-color: #FFFCF7;">
+
+                        <div class="mb-4">
+                            <div class="rounded-circle d-flex
+                                align-items-center justify-content-center"
+                                 style="width: 52px;
+                                height: 52px;
+                                background-color: #F3EBDD;">
+
+                                <i class="bi bi-chat-square-text fs-3"
+                                   style="color: #765347;"></i>
+                            </div>
+                        </div>
+
+                        <h4 style="color: #482A25;">
+                            Pind
+                        </h4>
+
+                        <p style="color: #80665B;">
+                            Del et billede, en idé eller en
+                            opdatering med fællesskabet.
+                        </p>
+
+                        <div class="mt-auto pt-3">
+                            <div class="btn w-100 text-white"
+                                 style="background-color: #70483D;
+                                border-radius: 8px;">
+                                Vælg pind
+                            </div>
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
 </div>
+
+
 
 @code {
 

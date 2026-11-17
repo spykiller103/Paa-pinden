@@ -1,9 +1,10 @@
-using PaaPinden.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
-using PaaPinden.Components.Account;
 using Microsoft.EntityFrameworkCore;
+using PaaPinden.Components;
+using PaaPinden.Components.Account;
 using PaaPinden.Data;
+using PaaPinden.Persistence;
 
 namespace PaaPinden
 {
@@ -19,11 +20,13 @@ namespace PaaPinden
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             // Add services to the container.
-            builder.Services.AddRazorComponents().AddInteractiveServerComponents();
+            builder.Services.AddRazorComponents()
+                .AddInteractiveServerComponents();
 
             builder.Services.AddCascadingAuthenticationState();
 
             builder.Services.AddScoped<IdentityRedirectManager>();
+            builder.Services.AddScoped<IPindRepo, PindRepo>();
 
             builder.Services.AddAuthorization();
 

@@ -1,6 +1,53 @@
 ﻿@page "/CreatePind"
-<h3>PindComponent</h3>
+@inject IPindRepo PindRepo
+@inject NavigationManager navigationManager
+<h3>Pind</h3>
+<div>
+    <p>
+        <EditForm Model="pind" enctype="multipart/form-data" FormName="formCreatePind" OnValidSubmit="UploadMedia">
+            <DataAnnotationsValidator></DataAnnotationsValidator>
+            <ValidationSummary></ValidationSummary>
+            <label>Tilføj billede eller video</label>
+            <InputFile name="Pind.MediaType" class="form-control"></InputFile>
+
+
+            <button type="submit">Slå op</button>
+        </EditForm>
+    </p>
+</div>
+
+
+
 
 @code {
+    [SupplyParameterFromForm(FormName = "formCreatePind")]
+    private Pind pind { get; set; } = new();
 
+
+    private async Task SubmitPind()
+    {
+        // if (pind != null)
+        // {
+        //     await PindRepo.CreatePindAsync(pind);
+        //     navigationManager.NavigateTo("/Home");
+        // }
+    }
+    private async Task UploadMedia()
+    {
+        //Temp solution until we add the path to the database.
+        //You Need to have this exact named file on your c-drive, because it acts as a server to store all incoming posts for now
+
+        var folderPath = Path.Combine("C:\\Pind-Files");
+        var filePath = Path.Combine(folderPath, pind.MediaType.FileName);
+        //creates the folder on your c-drive for you
+        Directory.CreateDirectory(folderPath);
+        //FileMode creates a new file or overrides an existing with that exact name
+        await using var stream = new FileStream(filePath, FileMode.Create);
+        //Copies the uploaded file data to the stream in the folder
+        await pind.MediaType.CopyToAsync(stream);
+    }
+    class Pind()
+    {
+        public IFormFile MediaType { get; set; }
+    }
 }

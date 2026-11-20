@@ -39,12 +39,6 @@ namespace PaaPinden.Data
                 .HasForeignKey(p => p.ApplicationUserId)
                 .IsRequired();
 
-            builder.Entity<ApplicationUser>()
-                .HasMany(a => a.Recipes)
-                .WithOne(r => r.ApplicationUser)
-                .HasForeignKey(r => r.ApplicationUserId)
-                .IsRequired();
-
             builder.Entity<DiagramTool>()
                 .HasMany(d => d.Projects)
                 .WithOne(p => p.DiagramTool)
@@ -56,7 +50,6 @@ namespace PaaPinden.Data
                 .WithMany(a => a.Projects)
                 .HasForeignKey(p => p.ApplicationUserId)
                 .IsRequired();
-
         }
     }
 }

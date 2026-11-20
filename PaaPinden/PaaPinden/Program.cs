@@ -5,6 +5,7 @@ using PaaPinden.Components;
 using PaaPinden.Components.Account;
 using PaaPinden.Data;
 using PaaPinden.Persistence;
+using PaaPinden.Services;
 
 namespace PaaPinden
 {
@@ -27,6 +28,9 @@ namespace PaaPinden
 
             builder.Services.AddScoped<IdentityRedirectManager>();
             builder.Services.AddScoped<IPindRepo, PindRepo>();
+            builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+            builder.Services.AddScoped<IFileUploadService, FileUploadService>();
+            builder.Services.AddScoped<IPindService, PindService>();
 
             builder.Services.AddAuthorization();
 
@@ -64,6 +68,10 @@ namespace PaaPinden
 
             app.UseStatusCodePagesWithReExecute("/not-found", createScopeForStatusCodePages: true);
             app.UseHttpsRedirection();
+
+
+            app.UseAuthentication();  
+            app.UseAuthorization();
 
             app.UseAntiforgery();
 

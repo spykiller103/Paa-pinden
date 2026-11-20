@@ -1,4 +1,13 @@
-﻿<h3>Following</h3>
+﻿@page "/following"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<div class="feed-tabs">
+    <button class="tab-btn" @onclick='() => Navigation.NavigateTo("/followers")'>Followers</button>
+    <button class="tab-btn active">Following</button>
+</div>
+
+<h3>Following</h3>
 
 @code {
 

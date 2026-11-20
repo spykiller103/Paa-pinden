@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\ProfilePictures\" />
   </ItemGroup>
 
 </Project>

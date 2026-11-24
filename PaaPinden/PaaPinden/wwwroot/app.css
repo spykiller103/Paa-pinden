@@ -2,18 +2,6 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.brand-mark {
-    color: #fff8ee;
-    background: #b86043;
-    border-radius: 10px 10px 10px 3px;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    font: 800 18px Manrope;
-    display: grid;
-    transform: translateY(7.2px);
-}
-
 a, .btn-link {
     color: #006bb7;
 }

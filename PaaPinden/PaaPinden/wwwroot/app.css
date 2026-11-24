@@ -171,20 +171,19 @@ h1:focus {
 
 
 
-/*
-    Main layout styling
-
-*/
-
+/* Main layout styling */
 main {
     background-color: #FAF6F2;
+    font-family: "DM Sans", sans-serif;
+    font-synthesis: none;
 }
 
-.sidebar {
-    background-color: #362B28; 
-    background-image: none; 
+.heading-h1 {
+    margin: 7px 0 6px;
+    font: 800 clamp(28px, 4vw, 40px) / 1.1 "Manrope";
+    letter-spacing: -0.04em;
+    color: #49302d;
 }
-
 
 /* Top bar for Home and Followers*/
 .feed-tabs {
@@ -210,4 +209,46 @@ main {
         color: #2C2523;
         font-weight: 600;
         border-bottom: 2px solid #9E473B;
+    }
+
+
+/*Followers and following*/
+.search-bar {
+    padding-left: 40px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 48px;
+    border: 1px solid;
+    border-radius: 12px;
+    color: #8c7970;
+    background: #fffdf8;
+    width: 700px;
+}
+
+    .search-bar::placeholder {
+        color: #4e3d37;
+        opacity: 0.4;
+    }
+
+    .search-bar:focus {
+        background: #fffdf8;
+        outline: none;
+        box-shadow: none;
+        border-color: #8c7970
+    }
+
+.search-container {
+    position: relative;
+    width: 300px;
+}
+
+    .search-container .bi-search {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1;
+        color: #8c7970;
+        opacity: 0.9;
     }

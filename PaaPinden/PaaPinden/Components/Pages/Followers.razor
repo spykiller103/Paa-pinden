@@ -7,7 +7,23 @@
     <button class="tab-btn" @onclick='() => Navigation.NavigateTo("/following")'>Following</button>
 </div>
 
-<h3>Followers</h3>
+<br />
+
+
+<h1 class="heading-h1">Følgere</h1>
+<p>Strikkere, der følger med i dine projekter.</p>
+
+<!-- SearchBar -->
+<div class="search-container">
+    <i class="bi bi-search"></i>
+
+    <input class="search-bar form-control"
+           type="search"
+           placeholder="Søg efter en person"
+           aria-label="Search" />
+
+    <div class="search-results"></div>
+</div>
 
 @code {
     private bool showFollowers = true;

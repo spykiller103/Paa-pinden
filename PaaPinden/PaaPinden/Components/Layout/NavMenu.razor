@@ -21,13 +21,8 @@
             </div>
 
             <div class="nav-item px-3">
-                <NavLink class="nav-link" href="followers">
+                <NavLink class="@FollowersOrFollowingActive" href="followers">
                     <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Følgere
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="following">
-                    <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Følger
                 </NavLink>
             </div>
             <div class="nav-item px-3">
@@ -98,4 +93,6 @@
         NavigationManager.LocationChanged -= OnLocationChanged;
     }
 
+    private string FollowersOrFollowingActive =>
+        NavigationManager.Uri.ToLower().Contains("/followers") || NavigationManager.Uri.ToLower().Contains("/following") ? "nav-link active": "nav-link";
 }

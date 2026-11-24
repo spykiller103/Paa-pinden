@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using PaaPinden.Components;
 using PaaPinden.Components.Account;
 using PaaPinden.Data;
@@ -70,10 +71,16 @@ namespace PaaPinden
             app.UseHttpsRedirection();
 
 
-            app.UseAuthentication();  
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseAntiforgery();
+            Directory.CreateDirectory("C:\\Pind-Files");
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider("C:\\Pind-Files"),
+                RequestPath = "/pind-files"
+            });
 
             app.MapStaticAssets();
             app.MapRazorComponents<App>()

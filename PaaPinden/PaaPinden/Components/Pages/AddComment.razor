@@ -1,0 +1,38 @@
+﻿
+<div>
+    @if (Comments.Count == 0)
+    {
+        <p>Ingen kommentarer endnu.</p>
+    }
+    else
+    {
+        foreach (var comment in Comments)
+        {
+            <div class="comment-item">
+                <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
+                <span class="comment-author">@(comment.ApplicationUser.Name)</span>
+                <p class="comment-text">@comment.Text</p>
+            </div>
+        }
+    }
+    <div>
+        <input @bind="newComment" @bind:event="oninput" placeholder="Skriv en kommentar..." />
+        <button @onclick="SendAsync" disabled="@string.IsNullOrWhiteSpace(newComment)">Send</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public List<Comment> Comments { get; set; } = new();
+    [Parameter]
+    public EventCallback<string> OnCommentAdded { get; set; }
+
+    private string newComment = "";
+
+    private async Task SendAsync()
+    {
+        await OnCommentAdded.InvokeAsync(newComment);
+        newComment = "";
+    }
+
+}

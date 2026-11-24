@@ -1,0 +1,14 @@
+﻿@page "/PindFeed"
+@* @attribute [Authorize] *@
+@* @inject IPindService PindService *@
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+<h3>PindFeed</h3>
+
+
+@code {
+    [Parameter]
+     public Pind Pind { get; set; } = default!;
+
+
+}

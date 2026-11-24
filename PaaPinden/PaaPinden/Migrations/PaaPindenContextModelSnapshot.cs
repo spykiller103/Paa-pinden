@@ -22,6 +22,21 @@ namespace PaaPinden.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ApplicationUserPind", b =>
+                {
+                    b.Property<string>("LikedById")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("LikedPindsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LikedById", "LikedPindsId");
+
+                    b.HasIndex("LikedPindsId");
+
+                    b.ToTable("PindLikes", (string)null);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -185,7 +200,6 @@ namespace PaaPinden.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Biography")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -228,7 +242,6 @@ namespace PaaPinden.Migrations
                         .HasColumnType("bit");
 
                     b.Property<byte[]>("ProfilePicture")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -262,6 +275,9 @@ namespace PaaPinden.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
@@ -276,6 +292,8 @@ namespace PaaPinden.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("PindId");
 
@@ -328,16 +346,12 @@ namespace PaaPinden.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Like")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("MediaType")
+                    b.Property<string>("MediaPath")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");
@@ -429,6 +443,21 @@ namespace PaaPinden.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("ApplicationUserPind", b =>
+                {
+                    b.HasOne("PaaPinden.Data.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("LikedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PaaPinden.Models.Pind", null)
+                        .WithMany()
+                        .HasForeignKey("LikedPindsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -535,6 +564,10 @@ namespace PaaPinden.Migrations
 
             modelBuilder.Entity("PaaPinden.Models.Comment", b =>
                 {
+                    b.HasOne("PaaPinden.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
                     b.HasOne("PaaPinden.Models.Pind", "Pind")
                         .WithMany("Comments")
                         .HasForeignKey("PindId");
@@ -542,6 +575,8 @@ namespace PaaPinden.Migrations
                     b.HasOne("PaaPinden.Models.Recipe", "Recipe")
                         .WithMany("Comments")
                         .HasForeignKey("RecipeId");
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Pind");
 
@@ -553,7 +588,7 @@ namespace PaaPinden.Migrations
                     b.HasOne("PaaPinden.Data.ApplicationUser", "ApplicationUser")
                         .WithMany("Pinds")
                         .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("ApplicationUser");

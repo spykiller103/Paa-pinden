@@ -1,0 +1,91 @@
+﻿@page "/PindCard"
+@rendermode InteractiveServer
+@inject ICurrentUserService CurrentUserService
+@inject IPindService PindService
+@inject NavigationManager navigationManager
+<h3>PindCard</h3>
+
+
+@if (pind == null)
+{
+    <p>Indlæser...</p>
+}
+else
+{
+    <div class="feed-wrapper">
+
+   
+        <div class="post-header">
+          @*   Change to the location of the AppUsers ProfilePic *@
+            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar" />
+            @*Change @pind.Id to @profile.Name*@
+            <span class="post-author">@pind.Id</span>
+            <button class="action-btn">⋯</button>
+        </div>
+
+    
+        <img src="@pind.MediaPath" class="post-image" />
+
+   
+        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
+
+  
+        <div class="post-actions">
+            <button class="action-btn" @onclick="ToggleLikeAsync">@(IsLiked ? "❤️" : "🤍")</button>
+            <span class="LikesNumber">@pind.LikedBy.Count</span>
+
+            <button class="action-btn" @onclick="ToggleComments">💬</button>
+            <span class="CommentsNumber">@pind.Comments.Count</span>
+
+            <button class="action-btn">↗️</button>
+        </div>
+
+   
+        <div class="comments-section">
+           
+                @if (showComments)
+                {
+                    @*  OnCommentAdded is an eventcallback that notifies the parent(PindCard) to run the parents method *@
+                    <AddComment Comments="pind.Comments" OnCommentAdded="AddCommentAsync" />
+                }
+           
+        </div>
+
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Pind pind { get; set; } 
+    private string? currentUserId;
+
+    private bool IsLiked => pind.LikedBy.Any(u => u.Id == currentUserId);
+    private bool showComments;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        currentUserId = await CurrentUserService.GetUserIdAsync();
+        pind = await PindService.GetPindByIdAsync(4);
+
+
+    }
+    public async Task ToggleLikeAsync()
+    {
+
+        await PindService.ToggleLikeAsync(pind.Id);
+        pind = await PindService.GetPindByIdAsync(pind.Id);
+
+    }
+
+
+
+    private void ToggleComments() => showComments = !showComments;
+
+    private async Task AddCommentAsync(string text)
+    {
+        await PindService.AddCommentAsync(pind.Id, text);
+        pind = await PindService.GetPindByIdAsync(pind.Id);
+    }
+
+}

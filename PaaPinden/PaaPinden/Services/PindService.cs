@@ -41,13 +41,49 @@ namespace PaaPinden.Services
                 ?? throw new UnauthorizedAccessException("Du skal være logget ind.");
 
             var pind = await _pindRepo.GetPindByIdAsync(pindId);
+            if (pind == null) return;
 
-            if(pind.ApplicationUserId != userId)
+
+
+            if (pind.ApplicationUserId != userId)
             {
                 throw new UnauthorizedAccessException("Du kan kun slette dine egne opslag.");
 
             }
             await _pindRepo.DeletePindAsync(pindId);
+        }
+
+
+        public async Task<Pind?> GetPindByIdAsync(int pindId)
+        {
+            return await _pindRepo.GetPindByIdAsync(pindId);
+        }
+
+
+
+        public async Task ToggleLikeAsync(int pindId)
+        {
+            var userId = await _currentUser.GetUserIdAsync()
+                ?? throw new UnauthorizedAccessException("Du skal være logget ind.");
+
+            await _pindRepo.ToggleLikeAsync(pindId, userId);
+        }
+
+
+        public async Task AddCommentAsync(int pindId, string text)
+        {
+            var userId = await _currentUser.GetUserIdAsync()
+                ?? throw new UnauthorizedAccessException("Du skal være logget ind.");
+
+            var comment = new Comment
+            {
+                PindId = pindId,
+                Text = text,
+                Date = DateTime.Now,
+                ApplicationUserId = userId
+            };
+
+            await _pindRepo.AddCommentAsync(comment);
         }
     }
 }

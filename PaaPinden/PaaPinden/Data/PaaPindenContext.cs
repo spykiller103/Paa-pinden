@@ -27,6 +27,11 @@ namespace PaaPinden.Data
                 .HasForeignKey(c => c.PindId)
                 .IsRequired(false);
 
+            builder.Entity<Pind>()
+               .HasMany(p => p.LikedBy)
+               .WithMany(u => u.LikedPinds)
+               .UsingEntity(j => j.ToTable("PindLikes"));
+
             builder.Entity<Recipe>()
                 .HasMany(r => r.Comments)
                 .WithOne(c => c.Recipe)
@@ -37,7 +42,8 @@ namespace PaaPinden.Data
                 .HasMany(a => a.Pinds)
                 .WithOne(p => p.ApplicationUser)
                 .HasForeignKey(p => p.ApplicationUserId)
-                .IsRequired();
+                .IsRequired()
+                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<ApplicationUser>()
                 .HasMany(a => a.Recipes)
@@ -56,6 +62,10 @@ namespace PaaPinden.Data
                 .WithMany(a => a.Projects)
                 .HasForeignKey(p => p.ApplicationUserId)
                 .IsRequired();
+            builder.Entity<Comment>()
+                .HasOne(c => c.ApplicationUser)
+                .WithMany()
+                .HasForeignKey(c => c.ApplicationUserId);
 
         }
     }

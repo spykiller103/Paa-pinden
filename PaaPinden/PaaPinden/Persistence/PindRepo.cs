@@ -37,6 +37,9 @@ namespace PaaPinden.Persistence
         {
             return await _context.Pinds
                 .Include(p => p.ApplicationUser)
+                .Include(p => p.LikedBy)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.ApplicationUser)
                 .OrderByDescending(p => p.PostDate)
                  .ToListAsync();
         }
@@ -45,7 +48,42 @@ namespace PaaPinden.Persistence
         {
             return await _context.Pinds
                 .Include (p => p.ApplicationUser)
+                .Include(p => p.LikedBy)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.ApplicationUser)
                 .FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task ToggleLikeAsync(int pindId, string userId)
+        {
+           var pind = await GetPindByIdAsync(pindId);
+            if (pind == null) return;
+
+            var existingLike = pind.LikedBy.FirstOrDefault(u => u.Id == userId);
+
+            if (existingLike != null)
+            {
+                // The user has already liked it so remove the like
+                pind.LikedBy.Remove(existingLike);
+            }
+            else
+            {
+                // The user hasnt liked it yet so add the like
+                var user = await _context.Users.FindAsync(userId);
+                if (user == null) return;
+
+                pind.LikedBy.Add(user);
+            }
+
+            await _context.SaveChangesAsync();
+
+        }
+
+
+        public async Task AddCommentAsync(Comment comment)
+        {
+            await _context.Comments.AddAsync(comment);
+            await _context.SaveChangesAsync();
         }
     }
 }

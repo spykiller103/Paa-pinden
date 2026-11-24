@@ -4,9 +4,9 @@
     {
         public async Task<string> SaveFileAsync(IFormFile file)
         {
-
+            var fileName = Path.GetFileName(file.FileName);
             var folderPath = Path.Combine("C:\\Pind-Files");
-            var filePath = Path.Combine(folderPath, file.FileName);
+            var filePath = Path.Combine(folderPath, fileName);
 
 
             Directory.CreateDirectory(folderPath);
@@ -15,7 +15,7 @@
 
             await file.CopyToAsync(stream);
 
-            return filePath;
+            return $"/pind-files/{Uri.EscapeDataString(fileName)}";
         }
     }
 }

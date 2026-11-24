@@ -14,12 +14,13 @@ namespace PaaPinden.Models
         public string? Description {  get; set; }
 
         public DateTime PostDate { get; set; }
-        public int Like { get; set; }
 
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
 
         public List<Comment> Comments { get; set; } = new();
+     
+        public ICollection<ApplicationUser> LikedBy { get; set; } = new List<ApplicationUser>();
     }
 }

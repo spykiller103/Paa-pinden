@@ -1,73 +1,69 @@
 ﻿@page "/profile"
+@rendermode InteractiveServer
+@inherits OwningComponentBase
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<PageTitle>Profil - @Username</PageTitle>
+@if (currentUser is not null)
+{
+    <div class="profile-wrapper">
 
-<div class="profile-wrapper">
+        @* Profile *@
+        <div class="profile-card">
+            <div class="profile-top">
+                <img src="@currentUser.ProfilePicture" alt="Profilbillede" class="profile-avatar" />
 
-    @* Profile *@
-    <div class="profile-card">
-        <div class="profile-top">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Profilbillede" class="profile-avatar" />
-
-            <div class="profile-info">
-                <div class="profile-name-row">
-                    <h2 class="profile-name">@FullName</h2>
-                    <span class="profile-handle">@Username</span>
+                <div class="profile-info">
+                    <div class="profile-name-row">
+                        <h2 class="profile-name">@currentUser.FullName</h2>
+                        <span class="profile-handle">@@@currentUser.UserName</span>
+                    </div>
                 </div>
-                <p class="profile-location">📍 @Location</p>
-                <p class="profile-bio">@Bio</p>
+
+                <button class="edit-profile-btn" @onclick="GoToEditProfile">Rediger profil</button>
             </div>
 
-            <button class="edit-profile-btn">Rediger profil</button>
-        </div>
-
-        @*Stats about user followers*@
-        <div class="profile-stats">
-            <div class="stat-item">
-                <span class="stat-number">5</span>
-                <span class="stat-label">Opslag</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">10</span>
-                <span class="stat-label">Følgere</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">20</span>
-                <span class="stat-label">Følger</span>
+            @* Stats about user followers *@
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-number">5</span>
+                    <span class="stat-label">Opslag</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-label">Følgere</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">20</span>
+                    <span class="stat-label">Følger</span>
+                </div>
             </div>
         </div>
     </div>
-
-  @* Profile-posts*@
-    <div class="post-card">
-        <div class="post-header">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Profilbillede" class="avatar" />
-            <span class="post-author">@FullName</span>
-        </div>
-
-        <div class="post-body">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-            <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-        </div>
-
-        <div class="post-actions">
-            <button class="action-btn">🤍</button>
-            <span class="LikesNumber">69</span>
-
-            <button class="action-btn">💬</button>
-            <span class="CommentsNumber">42</span>
-
-            <button class="action-btn">↗️</button>
-        </div>
-    </div>
-
-
-
-</div>
+}
 
 @code {
-    private string FullName { get; set; } = "Mathilde Simonsen";
-    private string Username { get; set; } = "@mathildes";
-    private string Location { get; set; } = "Odense C";
-    private string Bio { get; set; } = "Elsker strikning!";
+    private ApplicationUser? currentUser;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var userManager = ScopedServices.GetRequiredService<UserManager<ApplicationUser>>();
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var claimsPrincipal = authState.User;
+
+        if (claimsPrincipal.Identity?.IsAuthenticated == true)
+        {
+            currentUser = await userManager.GetUserAsync(claimsPrincipal);
+        }
+
+        if (currentUser is null)
+        {
+            NavigationManager.NavigateTo("/not-found");
+        }
+    }
+
+    private void GoToEditProfile()
+    {
+        NavigationManager.NavigateTo("Account/Manage");
+    }
 }

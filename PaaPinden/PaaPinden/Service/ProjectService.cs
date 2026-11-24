@@ -15,6 +15,10 @@ namespace PaaPinden.Service
         {
             return await _projectRepo.GetAllProjectsAsync();
         }
+        public async Task<List<Project>> GetProjectsByUserIdAsync(string userId)
+        {
+            return await _projectRepo.GetProjectsByUserIdAsync(userId);
+        }
         public async Task<Project> GetProjectByIdAsync(int id)
         {
             return await _projectRepo.GetProjectByIdAsync(id);

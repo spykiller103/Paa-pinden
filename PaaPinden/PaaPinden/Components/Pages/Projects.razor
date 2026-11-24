@@ -1,7 +1,50 @@
-﻿@page "/projects";
+﻿@page "/projects"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject ProjectService ProjectService
 
-<h3>Projects</h3>
+<PageTitle>Mine projekter</PageTitle>
+
+<h1>Mine projekter</h1>
+
+@if (isLoading)
+{
+    <p>Indlæser projekter...</p>
+}
+else if (projects.Count == 0)
+{
+    <p>Du har ikke oprettet nogen projekter endnu.</p>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (Project? project in projects)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h2 class="card-title h5">@project.Name</h2>
+                        <p class="card-text">@project.Description</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
 
 @code {
+    private List<Project> projects = new();
+    private bool isLoading = true;
 
+    protected override async Task OnInitializedAsync()
+    {
+        AuthenticationState authenticationState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        string? userId = authenticationState.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (!string.IsNullOrEmpty(userId))
+        {
+            projects = await ProjectService.GetProjectsByUserIdAsync(userId);
+        }
+
+        isLoading = false;
+    }
 }

@@ -1,29 +1,60 @@
-﻿using PaaPinden.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PaaPinden.Data;
+using PaaPinden.Models;
 
 namespace PaaPinden.Persistence
 {
-    public class ProjectRepo
+    public class ProjectRepo : IProjectRepo
     {
-        private List<Project> listOfProjects;
+        private readonly DbContextOptions<PaaPindenContext> _options;
 
-        public async Task GetAllProjectsAsync()
+        public ProjectRepo(DbContextOptions<PaaPindenContext> options)
         {
-            throw new NotImplementedException();
+            _options = options;
         }
 
-        public async Task GetProjectByIdAsync(int id)
+        public async Task<List<Project>> GetAllProjectsAsync()
         {
-            throw new NotImplementedException();
+            PaaPindenContext? context = new PaaPindenContext(_options);
+
+            return await context.Projects
+                .Include(project => project.DiagramTool)
+                .ToListAsync();
+        }
+
+        public async Task<List<Project>> GetProjectsByUserIdAsync(string userId)
+        {
+             PaaPindenContext? context = new PaaPindenContext(_options);
+
+            return await context.Projects
+                .Where(project => project.ApplicationUserId == userId)
+                .Include(project => project.DiagramTool)
+                .ToListAsync();
+        }
+
+        public async Task<Project> GetProjectByIdAsync(int id)
+        {
+             PaaPindenContext? context = new PaaPindenContext(_options);
+
+            return await context.Projects
+                .Include(project => project.DiagramTool)
+                .FirstOrDefaultAsync(project => project.Id == id);
         }
 
         public async Task CreateProjectAsync(Project project)
         {
-            throw new NotImplementedException();
+            PaaPindenContext? context = new PaaPindenContext(_options);
+
+            context.Projects.Add(project);
+            await context.SaveChangesAsync();
         }
 
         public async Task DeleteProjectAsync(Project project)
         {
-            throw new NotImplementedException();
+            PaaPindenContext? context = new PaaPindenContext(_options);
+
+            context.Projects.Remove(project);
+            await context.SaveChangesAsync();
         }
     }
 }

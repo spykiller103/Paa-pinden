@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using PaaPinden.Components.Account;
 using Microsoft.EntityFrameworkCore;
 using PaaPinden.Data;
+using PaaPinden.Persistence;
+using PaaPinden.Service;
 
 namespace PaaPinden
 {
@@ -44,6 +46,8 @@ namespace PaaPinden
     .AddDefaultTokenProviders();
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+            builder.Services.AddScoped<IProjectRepo, ProjectRepo>();
+            builder.Services.AddScoped<ProjectService>();
 
             var app = builder.Build();
 

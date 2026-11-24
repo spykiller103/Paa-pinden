@@ -22,7 +22,7 @@
         <nav class="nav flex-column">
             <div class="nav-item px-3">
                 <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Hjem
+                    <span class="bi bi-house-door-fill custom-icon-transformer" aria-hidden="true"></span> Hjem
                 </NavLink>
             </div>
 
@@ -36,7 +36,7 @@
                 <Authorized>
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="createPost">
-                            <span class="bi bi-plus-lg-nav-menu" aria-hidden="true"></span> Opret opslag
+                            <span class="bi bi-plus-lg custom-icon-transformer" aria-hidden="true"></span> Opret opslag
                         </NavLink>
                     </div>
 
@@ -57,7 +57,7 @@
                             <AntiforgeryToken />
                             <input type="hidden" name="ReturnUrl" value="@currentUrl" />
                             <button type="submit" class="nav-link">
-                                <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Log ud
+                                <span class="bi bi-arrow-bar-left custom-icon-transformer" aria-hidden="true"></span> Log ud
                             </button>
                         </form>
                     </div>
@@ -76,12 +76,12 @@
                 <NotAuthorized>
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="Account/Register">
-                            <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
+                            <span class="bi bi-person custom-icon-transformer" aria-hidden="true"></span> Register
                         </NavLink>
                     </div>
                     <div class="nav-item px-3">
                         <NavLink class="nav-link" href="Account/Login">
-                            <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
+                            <span class="bi bi-person-badge custom-icon-transformer" aria-hidden="true"></span> Login
                         </NavLink>
                     </div>
                 </NotAuthorized>

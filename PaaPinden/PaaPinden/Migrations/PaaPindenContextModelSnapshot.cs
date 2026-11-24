@@ -198,6 +198,14 @@ namespace PaaPinden.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -233,7 +241,6 @@ namespace PaaPinden.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
@@ -331,9 +338,9 @@ namespace PaaPinden.Migrations
                     b.Property<int>("Like")
                         .HasColumnType("int");
 
-                    b.Property<byte[]>("MediaType")
+                    b.Property<string>("MediaType")
                         .IsRequired()
-                        .HasColumnType("varbinary(max)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("PostDate")
                         .HasColumnType("datetime2");

@@ -1,5 +1,11 @@
-﻿@implements IDisposable
+﻿@using Microsoft.AspNetCore.Identity
+@using PaaPinden.Data
+@using Microsoft.AspNetCore.Components.Authorization
+
+@implements IDisposable
 @inject NavigationManager NavigationManager
+@inject UserManager<ApplicationUser> UserManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="navbar-container">
     <div class="container-fluid">
@@ -22,24 +28,30 @@
 
             <div class="nav-item px-3">
                 <NavLink class="@FollowersOrFollowingActive" href="followers">
-                    <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Følgere
-                </NavLink>
-            </div>
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="forYou">
-                    <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> For You
-                </NavLink>
-            </div>
-
-   
-            <div class="nav-item px-3">
-                <NavLink class="nav-link" href="createPost">
-                    <span class="bi bi-plus-lg-nav-menu" aria-hidden="true"></span> Opret opslag
+                    <span class="bi bi-people custom-icon-transformer" aria-hidden="true"></span> Følgere
                 </NavLink>
             </div>
     
             <AuthorizeView>
                 <Authorized>
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="createPost">
+                            <span class="bi bi-plus-lg-nav-menu" aria-hidden="true"></span> Opret opslag
+                        </NavLink>
+                    </div>
+
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="projects">
+                            <span class="bi bi-collection custom-icon-transformer" aria-hidden="true"></span> Projekter
+                        </NavLink>
+                    </div>
+
+                    <div class="nav-item px-3">
+                        <NavLink class="nav-link" href="savedposts">
+                            <span class="bi bi-bookmarks custom-icon-transformer" aria-hidden="true"></span> Gemte opslag
+                        </NavLink>
+                    </div>
+
                     <div class="nav-item px-3">
                         <form action="Account/Logout" method="post">
                             <AntiforgeryToken />
@@ -50,15 +62,19 @@
                         </form>
                     </div>
 
-                    <div class="nav-item navbar-user px-3">
+                    <div class="nav-item navbar-user">
                         <NavLink class="nav-link" href="Account/Manage">
-                            <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span>
-                            @context.User.Identity?.Name
+                            <img class="profile-picture" src="@currentUser?.ProfilePicture" aria-hidden="true" />
+
+                            <div class="user-info">
+                                <p class="text-white">@currentUser?.FullName</p>
+                                <p class="username">@@@currentUser?.UserName</p>
+                            </div>
                         </NavLink>
                     </div>
                 </Authorized>
                 <NotAuthorized>
-                    <div class="nav-item navbar-user px-3">
+                    <div class="nav-item px-3">
                         <NavLink class="nav-link" href="Account/Register">
                             <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
                         </NavLink>
@@ -75,11 +91,21 @@
 </div>
 
 @code {
+    private ApplicationUser? currentUser;
     private string? currentUrl;
-    protected override void OnInitialized()
+    
+    protected override async Task OnInitializedAsync()
     {
         currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
         NavigationManager.LocationChanged += OnLocationChanged;
+
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var claimsPrincipal = authState.User;
+
+        if (claimsPrincipal.Identity?.IsAuthenticated == true)
+        {
+            currentUser = await UserManager.GetUserAsync(claimsPrincipal);
+        }
     }
 
     private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
@@ -94,5 +120,5 @@
     }
 
     private string FollowersOrFollowingActive =>
-        NavigationManager.Uri.ToLower().Contains("/followers") || NavigationManager.Uri.ToLower().Contains("/following") ? "nav-link active": "nav-link";
+        NavigationManager.Uri.ToLower().Contains("/followers") || NavigationManager.Uri.ToLower().Contains("/following") ? "nav-link active" : "nav-link";
 }

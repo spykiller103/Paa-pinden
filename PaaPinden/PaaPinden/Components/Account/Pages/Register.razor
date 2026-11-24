@@ -37,6 +37,16 @@
                 <ValidationMessage For="() => Input.Username" class="text-danger" />
             </div>
             <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.FirstName" id="Input.FirsName" class="form-control" autocomplete="FirstName" aria-required="true" placeholder="Navn" autocapitalize="none" />
+                <label for="Input.FirstName">Fornavn</label>
+                <ValidationMessage For="() => Input.FirstName" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
+                <InputText @bind-Value="Input.LastName" id="Input.LastName" class="form-control" autocomplete="LastName" aria-required="true" placeholder="Efternavn" autocapitalize="none" />
+                <label for="Input.LastName">Efternavn</label>
+                <ValidationMessage For="() => Input.LastName" class="text-danger" />
+            </div>
+            <div class="form-floating mb-3">
                 <InputText type="password" @bind-Value="Input.Password" id="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label for="Input.Password">Password</label>
                 <ValidationMessage For="() => Input.Password" class="text-danger" />
@@ -77,6 +87,9 @@
     public async Task RegisterUser(EditContext editContext)
     {
         var user = CreateUser();
+
+        user.FirstName = Input.FirstName;
+        user.LastName = Input.LastName;
 
         await UserStore.SetUserNameAsync(user, Input.Username, CancellationToken.None);
         var emailStore = GetEmailStore();
@@ -145,6 +158,14 @@
         [Required]
         [Display(Name = "Username")]
         public string Username { get; set; } = "";
+
+        [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; } = "";
+
+        [Required]
+        [Display(Name = "LastName")]
+        public string LastName { get; set; } = "";
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]

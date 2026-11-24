@@ -2,17 +2,6 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-.brand-mark, .auth-mark {
-    color: #fff8ee;
-    background: #b86043;
-    border-radius: 10px 10px 10px 3px;
-    place-items: center;
-    width: 34px;
-    height: 34px;
-    font: 800 18px Manrope;
-    display: grid;
-}
-
 a, .btn-link {
     color: #006bb7;
 }
@@ -70,8 +59,6 @@ h1:focus {
     text-align: start;
 }
 
-
-
 .action-btn {
     background: transparent;
     border: none;
@@ -83,11 +70,18 @@ h1:focus {
 }
 
 
-
-/* Feed should be in the middle*/
 .feed-wrapper {
     max-width: 500px;
     margin: 20px auto;
+}
+
+.post-card {
+    background-color: #FFFFFF;
+    border: 1px solid #EFE8E1;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(44, 37, 35, 0.04);
 }
 
 .post-header {
@@ -104,6 +98,17 @@ h1:focus {
     object-fit: cover;
 }
 
+.follow-btn {
+    margin-left: auto;
+    background-color: #9E473B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
 
 .post-image {
     width: 100%;
@@ -115,6 +120,14 @@ h1:focus {
     margin-bottom: 12px;
 }
 
+.post-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F0EAE4;
+}
+
 .LikesNumber, .CommentsNumber {
     margin-right: 16px;
     font-weight: 600;
@@ -124,11 +137,18 @@ h1:focus {
 /*
     Comments-style
 */
+.comments-section {
+    margin-top: 12px;
+}
+
 .comment-item {
     display: flex;
     align-items: center;
     gap: 8px;
     margin: 8px 0;
+    background-color: #FAF6F2;
+    padding: 8px 12px;
+    border-radius: 12px;
 }
 
 .avatar-small {
@@ -147,7 +167,26 @@ h1:focus {
 }
 
 
-/* Home and followers top*/
+
+
+
+
+/*
+    Main layout styling
+
+*/
+
+main {
+    background-color: #FAF6F2;
+}
+
+.sidebar {
+    background-color: #362B28; 
+    background-image: none; 
+}
+
+
+/* Top bar for Home and Followers*/
 .feed-tabs {
     display: flex;
     justify-content: center;

@@ -2,287 +2,73 @@
 
 <PageTitle>Home</PageTitle>
 
-<div class="feed-wrapper"> 
-       
-    @*
-        Profilepicture and post-image
-    *@
+
+<div class="feed-tabs">
+    <button class="tab-btn active">Til dig</button>
+    <button class="tab-btn">Følger</button>
+</div>
+
+
+Udvalgt til dig
+Nye masker, projekter og garnfund fra dit strikkefællesskab
+
+
+
+
+<div class="feed-wrapper">
+
+    
+    <div class="post-card">
+
+        @* The header of the post *@
+        <div class="post-header">
+            <div class="post-header-left">
+                <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Profilbillede" class="avatar" />
+                <div class="author-info">
+                    <span class="post-author">Mathilde Simonsen</span>
+                    <span class="post-meta">Odense C · 2 timer siden</span>
+                </div>
+            </div>
+            <button class="follow-btn">Følg</button>
+        </div>
+
+        @*
+            Post-image and description
+        *@
         <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
+            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
+            <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
         </div>
 
         @*
             This is: likes, comments and share buttons
         *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
+        <div class="post-actions">
+            <button class="action-btn">🤍</button>
             <span class="LikesNumber">69</span>
 
-        <button class="action-btn">💬</button>
+            <button class="action-btn">💬</button>
             <span class="CommentsNumber">42</span>
 
-        <button class="action-btn">↗️</button>
-    </div>
+            <button class="action-btn">↗️</button>
+        </div>
 
-       @*
-           Commentsection
-       *@
+        @*
+            Commentsection
+        *@
         <div class="comments-section">
-            <p>----------------</p>
             <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
+                <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
+                <span class="comment-author">Bo Børgesen</span>
                 <p class="comment-text">Så flot!</p>
             </div>
-               <p>----------------</p>
+            <div class="comment-item">
+                <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
+                <span class="comment-author">Jens Jensen</span>
+                <p class="comment-text">Dygtigeeeee!</p>
+            </div>
         </div>
 
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
     </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-    </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-    </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-    </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-    </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-    </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-
-    <div class="post-body">
-        <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
-        <span class="post-author"> Mathilde Simonsen</span>
-        <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
-    </div>
-
-    @*
-            This is: likes, comments and share buttons
-        *@
-    <div class="post-actions">
-        <button class="action-btn ">🤍</button>
-        <span class="LikesNumber">69</span>
-
-        <button class="action-btn">💬</button>
-        <span class="CommentsNumber">42</span>
-
-        <button class="action-btn">↗️</button>
-    </div>
-
-    @*
-           Commentsection
-       *@
-    <div class="comments-section">
-        <p>----------------</p>
-        <div class="comment-item">
-            <img src="/Content/Images/ProfilePictureTemp.jpg" class="avatar-small" />
-            <span class="comment-author"> Bo Børgesen</span>
-            <p class="comment-text">Så flot!</p>
-        </div>
-        <p>----------------</p>
-    </div>
-
-
-
-
 
 </div>

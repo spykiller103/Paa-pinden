@@ -1,8 +1,73 @@
 ﻿@page "/profile"
 
+<PageTitle>Profil - @Username</PageTitle>
 
-<h3>Profile</h3>
+<div class="profile-wrapper">
+
+    @* Profile *@
+    <div class="profile-card">
+        <div class="profile-top">
+            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Profilbillede" class="profile-avatar" />
+
+            <div class="profile-info">
+                <div class="profile-name-row">
+                    <h2 class="profile-name">@FullName</h2>
+                    <span class="profile-handle">@Username</span>
+                </div>
+                <p class="profile-location">📍 @Location</p>
+                <p class="profile-bio">@Bio</p>
+            </div>
+
+            <button class="edit-profile-btn">Rediger profil</button>
+        </div>
+
+        @*Stats about user followers*@
+        <div class="profile-stats">
+            <div class="stat-item">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Opslag</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10</span>
+                <span class="stat-label">Følgere</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">20</span>
+                <span class="stat-label">Følger</span>
+            </div>
+        </div>
+    </div>
+
+  @* Profile-posts*@
+    <div class="post-card">
+        <div class="post-header">
+            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Profilbillede" class="avatar" />
+            <span class="post-author">@FullName</span>
+        </div>
+
+        <div class="post-body">
+            <img src="/Content/Images/ProfilePictureTemp.jpg" alt="Opslagsbillede" class="post-image" />
+            <p class="post-text">Jeg har lige løbet 1km, så stolt af mig selv!😍</p>
+        </div>
+
+        <div class="post-actions">
+            <button class="action-btn">🤍</button>
+            <span class="LikesNumber">69</span>
+
+            <button class="action-btn">💬</button>
+            <span class="CommentsNumber">42</span>
+
+            <button class="action-btn">↗️</button>
+        </div>
+    </div>
+
+
+
+</div>
 
 @code {
-
+    private string FullName { get; set; } = "Mathilde Simonsen";
+    private string Username { get; set; } = "@mathildes";
+    private string Location { get; set; } = "Odense C";
+    private string Bio { get; set; } = "Elsker strikning!";
 }

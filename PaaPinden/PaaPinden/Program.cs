@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using PaaPinden.Components.Account;
 using Microsoft.EntityFrameworkCore;
 using PaaPinden.Data;
+using PaaPinden.Persistence;
 
 namespace PaaPinden
 {
@@ -24,6 +25,7 @@ namespace PaaPinden
             builder.Services.AddCascadingAuthenticationState();
 
             builder.Services.AddScoped<IdentityRedirectManager>();
+            builder.Services.AddScoped<IUserRepo, UserRepo>();
 
             builder.Services.AddAuthorization();
 

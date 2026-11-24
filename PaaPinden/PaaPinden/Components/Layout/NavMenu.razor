@@ -1,10 +1,10 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using PaaPinden.Data
-@using Microsoft.AspNetCore.Components.Authorization
+﻿@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Identity
 
 @implements IDisposable
 @inject NavigationManager NavigationManager
 @inject UserManager<ApplicationUser> UserManager
+@inject IUserRepo UserRepo
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <div class="navbar-container">
@@ -100,11 +100,11 @@
         NavigationManager.LocationChanged += OnLocationChanged;
 
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var claimsPrincipal = authState.User;
+        var userId = UserManager.GetUserId(authState.User);
 
-        if (claimsPrincipal.Identity?.IsAuthenticated == true)
+        if (userId != null)
         {
-            currentUser = await UserManager.GetUserAsync(claimsPrincipal);
+            currentUser = await UserRepo.GetUserByIdAsync(userId);
         }
     }
 

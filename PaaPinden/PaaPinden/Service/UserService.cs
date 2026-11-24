@@ -16,7 +16,7 @@ namespace PaaPinden.Service
         {
             return await _userRepo.GetAllUsersAsync();
         }
-        public async Task<ApplicationUser> GetUserByIdAsync(int id)
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
         {
             return await _userRepo.GetUserByIdAsync(id);
         }

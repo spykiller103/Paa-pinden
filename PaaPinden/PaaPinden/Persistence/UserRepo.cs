@@ -1,17 +1,26 @@
-﻿using PaaPinden.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using PaaPinden.Data;
 namespace PaaPinden.Persistence
 {
-    public class UserRepo
+    public class UserRepo : IUserRepo
     {
+        private readonly DbContextOptions<PaaPindenContext> _options;
         private List<ApplicationUser> listOfUsers;
-        public async Task GetAllUsersAsync()
+
+        public UserRepo(DbContextOptions<PaaPindenContext> options)
+        {
+            _options = options;
+        }
+        public async Task<List<ApplicationUser>> GetAllUsersAsync()
         {
             throw new NotImplementedException();
         }
 
-        public async Task GetUserByIdAsync(int id)
+        public async Task<ApplicationUser> GetUserByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            PaaPindenContext context = new PaaPindenContext(_options);
+
+            return await context.Users.FirstOrDefaultAsync(user => user.Id == id);
         }
 
         public async Task CreateUserAsync(ApplicationUser user)
@@ -23,8 +32,5 @@ namespace PaaPinden.Persistence
         {
             throw new NotImplementedException();
         }
-
-
-
     }
 }
